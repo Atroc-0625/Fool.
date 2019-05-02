@@ -34,6 +34,11 @@ vim /etc/ssh/sshd_config
 *PasswordAuthentication yes
 /etc/init.d/ssh restart
 
+//安装httpd
+yum install httpd
+systemctl enable httpd.service
+systemctl restart httpd.service
+
 //TCP Fast Open
 cat /proc/sys/net/ipv4/tcp_fastopen
 nano /etc/sysctl.conf
