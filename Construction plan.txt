@@ -1,0 +1,129 @@
+//测速脚本
+wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
+
+#搭建方案
+//安装纯净系统前准备
+apt-get update
+//安装纯净系统
+apt-get install -y xz-utils openssl gawk file
+wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
+bash InstallNET.sh -d 9 -v 64 -a
+#root密码:Vicer
+//vi无法正常编辑
+apt-get remove vim-common
+apt-get install vim
+//修改网卡名称
+vi /etc/default/grub
+GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+grub-mkconfig -o /boot/grub/grub.cfg
+vi /etc/network/interfaces
+//安装iptables
+apt-get install iptables
+//安装curl
+apt-get install curl
+//修改hostname
+vi /etc/hostname
+//修改时间
+date -R
+tzselect
+cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+//修改SSH
+vim /etc/ssh/sshd_config
+*PermitRootLogin yes
+*PubkeyAuthentication yes
+*PasswordAuthentication yes
+/etc/init.d/ssh restart
+
+//TCP Fast Open
+cat /proc/sys/net/ipv4/tcp_fastopen
+nano /etc/sysctl.conf
+net.ipv4.tcp_fastopen=3 //添加
+sysctl -p
+
+//MPTCP
+apt-get install dirmngr
+apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 379CE192D401AB61
+sh -c "echo 'deb https://dl.bintray.com/cpaasch/deb stretch main' > /etc/apt/sources.list.d/mptcp.list"
+apt-get update
+apt-get install linux-mptcp
+cd /etc/network/if-up.d/
+wget https://raw.githubusercontent.com/multipath-tcp/mptcp-scripts/master/scripts/rt_table/mptcp_up
+chmod +x mptcp_up
+cd /etc/network/if-post-down.d/
+wget https://raw.githubusercontent.com/multipath-tcp/mptcp-scripts/master/scripts/rt_table/mptcp_down
+chmod +x mptcp_down
+reboot
+# dmesg | grep MPTCP
+// 应返回 MPTCP 模块的版本号
+[ 0.169869] MPTCP: Stable release v0.94.2
+# sysctl net.mptcp.mptcp_enabled
+// 应返回 mptcp 处于默认开启状态 1
+net.mptcp.mptcp_enabled = 1
+
+//socks5
+wget --no-check-certificate https://raw.github.com/Lozy/danted/master/install.sh -O socks5.sh
+bash socks5.sh --port=543 --user=admin --passwd=admin
+/etc/init.d/sockd status
+
+// MTProxy
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/mtproxy_go.sh && chmod +x mtproxy_go.sh && bash mtproxy_go.sh
+
+//魔改BBR
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+
+//anycoonect
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ocserv.sh && chmod +x ocserv.sh && bash ocserv.sh
+
+//ssr
+wget -q -N --no-check-certificate https://git.fdos.me/stack/AR-B-P-B/raw/master/install.sh && bash install.sh develop
+vi /usr/local/shadowsocksr/mudb.json
+
+//ssrr
+wget --no-check-certificate -O shadowsocksRR.sh https://git.io/vdMUr && chmod +x shadowsocksRR.sh && ./shadowsocksRR.sh 2>&1 | tee shadowsocksR.log
+
+//SSR.GO
+apt-get install curl
+bash -c "$(curl -fsSL https://git.io/fNpuL)"
+vi /etc/shadowsocks.json
+/etc/init.d/shadowsocks restart
+//配置文件
+{
+    "server":"0.0.0.0",
+    "server_ipv6":"[::]",
+    "server_port":443,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+	
+    "password":"admin443",
+    "timeout":120,
+    "udp_timeout":60,
+    "method":"chacha20",
+    "protocol":"auth_aes128_md5",
+    "protocol_param":"443",
+    "obfs":"tls1.2_ticket_auth",
+    "obfs_param":"itunes.apple.com/cn/app/65",
+	
+    "dns_ipv6":false,
+    "connect_verbose_info":1,
+    "redirect":["*:443#itunes.apple.com/cn/app/65:443"],
+    "dns_ipv6":false,
+    "fast_open":false,
+    "workers":1
+}
+//中转配置
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j DNAT --to-destination 52.175.54.186:443
+iptables -t nat -A PREROUTING -p udp -m udp --dport 443 -j DNAT --to-destination 52.175.54.186:443
+iptables -t nat -A POSTROUTING -d 52.175.54.186 -p tcp -m tcp --dport 443 -j SNAT --to-source 10.0.0.4
+iptables -t nat -A POSTROUTING -d 52.175.54.186 -p udp -m udp --dport 443 -j SNAT --to-source 10.0.0.4
+//iptables开机加载
+iptables-save > /etc/iptables.up.rules
+echo -e '#!/bin/bash\n/sbin/iptables-restore < /etc/iptables.up.rules' > /etc/network/if-pre-up.d/iptables
+chmod +x /etc/network/if-pre-up.d/iptables
+//iptables保存
+iptables-save > /etc/iptables.up.rules
+//查看NAT规则
+iptables -t nat -vnL POSTROUTING
+iptables -t nat -vnL PREROUTING
+//删除NAT规则
+iptables -t nat -D POSTROUTING 1
+iptables -t nat -D PREROUTING 1
