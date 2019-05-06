@@ -9,24 +9,29 @@ apt-get install -y xz-utils openssl gawk file
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 bash InstallNET.sh -d 9 -v 64 -a
 #root密码:Vicer
+
 //vi无法正常编辑
 apt-get remove vim-common
 apt-get install vim
+
 //修改网卡名称
 vi /etc/default/grub
 GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
 grub-mkconfig -o /boot/grub/grub.cfg
 vi /etc/network/interfaces
+
 //安装iptables
 apt-get install iptables
 //安装curl
 apt-get install curl
 //修改hostname
 vi /etc/hostname
+
 //修改时间
 date -R
 tzselect
 cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
 //修改SSH
 vim /etc/ssh/sshd_config
 *PermitRootLogin yes
