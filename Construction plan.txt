@@ -1,7 +1,6 @@
 //测速脚本
 wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
 
-
 #搭建方案
 //安装纯净系统前准备
 apt-get update
