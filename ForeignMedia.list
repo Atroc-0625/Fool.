@@ -1,5 +1,12 @@
 # (ForeignMedia)
 # (Video)
+# > Youtube
+USER-AGENT,com.google.ios.youtube*
+USER-AGENT,YouTube*
+USER-AGENT,YouTubeMusic*
+DOMAIN-SUFFIX,googlevideo.com
+DOMAIN-SUFFIX,youtube.com
+DOMAIN,youtubei.googleapis.com
 # > Amazon Prime Video (US|JP)
 USER-AGENT,InstantVideo.US*
 USER-AGENT,Prime%20Video*
@@ -70,6 +77,12 @@ DOMAIN-SUFFIX,gamer.com.tw
 DOMAIN-SUFFIX,hinet.net
 
 # (Music)
+# > Spotify
+USER-AGENT,Spotify*
+DOMAIN-SUFFIX,pscdn.co
+DOMAIN-SUFFIX,scdn.co
+DOMAIN-SUFFIX,spotify.com
+DOMAIN-SUFFIX,spoti.fi
 # > JOOX
 USER-AGENT,WeMusic*
 USER-AGENT,JOOX*
