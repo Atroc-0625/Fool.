@@ -22,8 +22,10 @@ vi /etc/network/interfaces
 
 //安装iptables
 apt-get install iptables
+
 //安装curl
 apt-get install curl
+
 //修改hostname
 vi /etc/hostname
 
@@ -43,6 +45,9 @@ vim /etc/ssh/sshd_config
 yum install httpd
 systemctl enable httpd.service
 systemctl restart httpd.service
+
+//apt-transport-https
+apt-get install apt-transport-https
 
 //TCP Fast Open
 cat /proc/sys/net/ipv4/tcp_fastopen
