@@ -75,6 +75,9 @@ reboot
 // 应返回 mptcp 处于默认开启状态 1
 net.mptcp.mptcp_enabled = 1
 
+//Swap
+wget https://yun.94ish.me/sh/swap.sh && bash swap.sh
+
 //socks5
 wget --no-check-certificate https://raw.github.com/Lozy/danted/master/install.sh -O socks5.sh
 bash socks5.sh --port=543 --user=admin --passwd=admin
