@@ -6,7 +6,7 @@ export PATH
 #	System Required: Debian/Ubuntu
 #	Description: ocserv AnyConnect
 #	Version: 1.0.0
-#	Author: Atroc
+#	Blog: https://doub.io/vpnzy-7/
 #=================================================
 sh_ver="1.0.0"
 file="/usr/local/sbin/ocserv"
@@ -516,7 +516,7 @@ Update_Shell(){
 check_sys
 [[ ${release} != "debian" ]] && [[ ${release} != "ubuntu" ]] && echo -e "${Error} 本脚本不支持当前系统 ${release} !" && exit 1
 echo && echo -e " ocserv 一键安装管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
-  -- Atroc-Anyconnect --
+  -- Atroc --
   
  ${Green_font_prefix}0.${Font_color_suffix} 升级脚本
 ————————————
