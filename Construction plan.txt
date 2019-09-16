@@ -1,6 +1,10 @@
 //测速脚本
 wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
 
+#Mac安装wtr
+brew install mtr 
+拷贝mtr mtr-packet文件到/usr/local/bin
+
 #搭建方案
 //安装纯净系统前准备
 apt-get update
