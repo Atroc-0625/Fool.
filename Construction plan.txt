@@ -5,6 +5,12 @@ wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/scr
 brew install mtr 
 拷贝mtr mtr-packet文件到/usr/local/bin
 
+#Linux设置代理
+vi .bashrc
+export http_proxy=http://vpn-tunnel.it-global.cn:62500
+export https_proxy=https://vpn-tunnel.it-global.cn:62500
+source .bashrc 
+
 #搭建方案
 //安装纯净系统前准备
 apt-get update
