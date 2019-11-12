@@ -7,8 +7,8 @@ brew install mtr
 
 #Linux设置代理
 vi .bashrc
-export http_proxy=http://vpn-tunnel.it-global.cn:62500
-export https_proxy=https://vpn-tunnel.it-global.cn:62500
+export http_proxy=http://tunnel.it-global.cn:62500
+export https_proxy=https://tunnel.it-global.cn:62500
 source .bashrc 
 
 #搭建方案
