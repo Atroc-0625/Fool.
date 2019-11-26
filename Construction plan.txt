@@ -11,6 +11,19 @@ export http_proxy=http://tunnel.it-global.cn:62500
 export https_proxy=https://tunnel.it-global.cn:62500
 source .bashrc 
 
+#自签证书
+openssl genrsa -out ca.key 2048
+openssl req -x509 -new -nodes -key ca.key -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Atroc/OU=Atroc/CN=Atroc/emailAddress=1074942721@qq.com" -days 36500 -out ca.crt
+openssl pkcs12 -export -clcerts -in ./ca.crt -inkey ca.key -out ca.p12 -password pass:Atroc
+base64 -w 0 ca.p12
+
+#网易云自签证书
+openssl genrsa -out server.key 2048
+openssl req -new -sha256 -key server.key -out server.csr -subj "/C=CN/L=Hangzhou/O=NetEase (Hangzhou) Network Co., Ltd/OU=ITDept./CN=*.music.163.com"
+openssl x509 -req -extfile <(printf "subjectAltName=DNS:music.163.com,DNS:*.music.163.com") -days 365 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt
+\cp Atroc/server.key UnblockNeteaseMusic/server.key 
+\cp Atroc/server.crt UnblockNeteaseMusic/server.crt
+
 #搭建方案
 //安装纯净系统前准备
 apt-get update
