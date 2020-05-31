@@ -5,6 +5,9 @@
 日本 8295      62660   (441)    62670  (444) C-my
 台湾 8296      62680   (472)    62690  (473) C-my
 
+//openwrt
+dd if=/tmp/upload/openwrt.img of=/dev/sda
+
 //测速脚本
 wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
 
