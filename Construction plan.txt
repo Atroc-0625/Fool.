@@ -3,7 +3,7 @@
 新加坡 8293    62620   (B2)      62630  (B3) rix
 美国 8294      62640   (481)     62650  (482) W-my
 日本 8295      62660   (441)    62670  (444) C-my
-台湾 8296      62680   (153)    62690  (154) C-ark
+台湾 8296      62680   (472)    62690  (473) C-my
 
 //测速脚本
 wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash
