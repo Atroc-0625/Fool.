@@ -3,7 +3,7 @@
 新加坡 8293    62620   (B2)      62630  (B3) rix
 美国 8294      62640   (481)     62650  (482) W-my
 日本 8295      62660   (441)    62670  (447) C-my
-台湾 8296      62680   (472)    62690  (473) C-my
+台湾 8296      62680   (478)    62690  (473) C-my
 
 //openwrt
 dd if=/tmp/upload/openwrt-x86-64-combined-squashfs.img of=/dev/sda
