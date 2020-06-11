@@ -108,6 +108,17 @@ reboot
 // 应返回 mptcp 处于默认开启状态 1
 net.mptcp.mptcp_enabled = 1
 
+//linux ipiptunnel
+创建ip tunnel
+sudo modprobe ipip
+ip tunnel add ipipshanyao mode ipip local 180.153.184.50 remote 103.234.128.130
+开启接口并且修改mtu值
+ip link set ipipshanyao up mtu 1480
+配置隧道接口地址
+ip addr add 172.16.201.1 peer 172.16.201.2 dev ipipshanyao
+修改默认路由
+ip route add 0.0.0.0/0 via 172.16.201.2
+
 //Swap
 wget https://yun.94ish.me/sh/swap.sh && bash swap.sh
 
