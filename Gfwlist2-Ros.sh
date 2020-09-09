@@ -35,9 +35,9 @@ else
     ${sudoCmd} ${systemPackage} install wget -y -qq
 fi
 
-wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./gfwlist_domain.rsc && rm-rf gfwlist2dnsmasq.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./Gfwlist_domain.rsc && rm-rf gfwlist2dnsmasq.sh
 
-gfwlist_domain_filename="gfwlist_domain.rsc"
+gfwlist_domain_filename="Gfwlist_domain.rsc"
 #增加额外需要加入gfwlist的域名
 echo "libreswan.org" >> ${gfwlist_domain_filename}
 echo "download.mikrotik.com" >> ${gfwlist_domain_filename}
