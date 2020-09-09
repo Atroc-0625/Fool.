@@ -72,4 +72,4 @@ sed -i '3 i/ip dns static' ${gfwlist_domain_filename}
 #sed -i '$r gfwlist_lastline_tmp' ${gfwlist_domain_filename}
 #rm -f gfwlist_lastline_tmp
 
-rm-rf gfwlist2dnsmasq.sh
+rm -rf gfwlist2dnsmasq.sh
