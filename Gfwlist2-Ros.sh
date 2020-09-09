@@ -35,7 +35,7 @@ else
     ${sudoCmd} ${systemPackage} install wget -y -qq
 fi
 
-wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./Gfwlist_domain.rsc && rm-rf gfwlist2dnsmasq.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./Gfwlist_domain.rsc 
 
 gfwlist_domain_filename="Gfwlist_domain.rsc"
 #增加额外需要加入gfwlist的域名
@@ -71,3 +71,5 @@ sed -i '3 i/ip dns static' ${gfwlist_domain_filename}
 #sed -i '$d' ${gfwlist_domain_filename}
 #sed -i '$r gfwlist_lastline_tmp' ${gfwlist_domain_filename}
 #rm -f gfwlist_lastline_tmp
+
+rm-rf gfwlist2dnsmasq.sh
