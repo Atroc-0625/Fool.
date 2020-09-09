@@ -5,8 +5,7 @@ else
   sudoCmd=""
 fi
 
-#copied & modified from atrandys trojan scripts
-#copy from 秋水逸冰 ss scripts
+
 if [[ -f /etc/redhat-release ]]; then
   release="centos"
   systemPackage="yum"
@@ -36,12 +35,13 @@ else
     ${sudoCmd} ${systemPackage} install wget -y -qq
 fi
 
-wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./gfwlist_domain.rsc
+wget -N --no-check-certificate https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh && chmod +x gfwlist2dnsmasq.sh && sh ./gfwlist2dnsmasq.sh -l -o ./gfwlist_domain.rsc && rm-rf gfwlist2dnsmasq.sh
 
 gfwlist_domain_filename="gfwlist_domain.rsc"
 #增加额外需要加入gfwlist的域名
 echo "libreswan.org" >> ${gfwlist_domain_filename}
 echo "download.mikrotik.com" >> ${gfwlist_domain_filename}
+echo "straitstimes.com" >> ${gfwlist_domain_filename}
 
 #开始处理 gfwlist_domain_filename 内容
 #方法1
