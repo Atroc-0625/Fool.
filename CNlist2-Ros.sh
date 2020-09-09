@@ -35,10 +35,10 @@ else
     ${sudoCmd} ${systemPackage} install wget -y -qq
 fi
 
-wget -N --no-check-certificate -O ./all_cn_cidr.rsc https://ispip.clang.cn/all_cn_cidr.txt
+wget -N --no-check-certificate -O ./CN_Cidr.rsc https://ispip.clang.cn/all_cn_cidr.txt
 
 
-cn_filename="all_cn_cidr.rsc"
+cn_filename="CN_Cidr.rsc"
 
 #增加私有地址
 echo "192.168.0.0/16" >> ${cn_filename}
