@@ -13,6 +13,7 @@ wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/scr
 
 #Mac安装wtr
 brew install mtr 
+mtr 目录 /usr/local/Cellar/mtr/0.92/sbin
 拷贝mtr mtr-packet文件到/usr/local/bin
 
 #Linux设置代理
