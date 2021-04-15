@@ -342,7 +342,7 @@ do_install() {
 			esac
 		;;
 
-		almalinux|rhel)
+		almalinux|centos|rhel)
 			if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
 				dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
 			fi
@@ -427,8 +427,14 @@ do_install() {
 			echo_docker_as_nonroot
 			exit 0
 			;;
-		almalinux|fedora|rhel)
-			yum_repo="$DOWNLOAD_URL/linux/centos/$REPO_FILE"
+		almalinux|centos|fedora|rhel)
+			if [ ("$lsb_dist" = "almalinux") || ("$lsb_dist" = "centos") ]; then
+				yum_repo="$DOWNLOAD_URL/linux/centos/$REPO_FILE"
+			else
+				yum_repo="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
+			fi
+
+			
 			if ! curl -Ifs "$yum_repo" > /dev/null; then
 				echo "Error: Unable to curl repository file $yum_repo, is it valid?"
 				exit 1
